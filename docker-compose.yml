@@ -8,16 +8,18 @@ services:
     restart: always
     container_name: minimesh-brain
 
-  # Only for advanced/Linux setups:
-  # agent:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.agent
-  #   cap_add:
-  #     - NET_ADMIN
-  #   network_mode: host
-  #   volumes:
-  #     - /etc/wireguard:/etc/wireguard
-  #     - /lib/modules:/lib/modules
-  #   environment:
-  #     - BRAIN_URL=http://your-brain-ip:8000
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+    volumes:
+      - /etc/wireguard:/etc/wireguard
+      - /lib/modules:/lib/modules
+    environment:
+      - BRAIN_URL=http://your-brain-ip:8000
+      - MACHINE_NAME=my-worker-node
+    restart: unless-stopped
+    container_name: minimesh-agent

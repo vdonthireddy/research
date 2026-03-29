@@ -20,18 +20,17 @@ docker compose up -d brain
 ## 2. Start the Agents (All Machines)
 Run this on your 5 MacBooks and 2 Windows desktops.
 
-1.  **Configure:** Edit `agent.py` and set `BRAIN_URL` to your Brain's local IP:
-    ```python
-    BRAIN_URL = "http://192.168.1.10:8000"
-    ```
-2.  **Run (macOS):**
-    ```bash
-    sudo python3 agent.py
-    ```
-3.  **Run (Windows):** Open Command Prompt as Administrator:
-    ```cmd
-    python agent.py
-    ```
+### Option A: Using Docker
+```bash
+BRAIN_URL=http://your-brain-ip:8000 MACHINE_NAME=my-node docker compose up -d agent
+```
+
+### Option B: Running Manually
+1.  **Configure:** Edit `agent.py` or set environment variables:
+    - `BRAIN_URL`: Your Brain's local IP (e.g., `http://192.168.1.10:8000`)
+    - `MACHINE_NAME`: A unique name for this machine.
+2.  **Run (macOS):** `sudo python3 agent.py`
+3.  **Run (Windows):** Run as Admin: `python agent.py`
 
 ---
 

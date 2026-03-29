@@ -4,11 +4,12 @@ import socket
 import os
 import time
 
-BRAIN_URL = "http://YOUR_BRAIN_IP:8000"  # Update this to your Brain's IP
-MACHINE_NAME = socket.gethostname()
+BRAIN_URL = os.getenv("BRAIN_URL", "http://localhost:8000")
+MACHINE_NAME = os.getenv("MACHINE_NAME", socket.gethostname())
 
 # Paths for WireGuard config and keys
-WG_DIR = "/etc/wireguard" if os.name != "nt" else "C:/WireGuard"
+# In Docker, we usually mount /etc/wireguard as a volume
+WG_DIR = os.getenv("WG_DIR", "/etc/wireguard" if os.name != "nt" else "C:/WireGuard")
 PRIVATE_KEY_PATH = f"{WG_DIR}/private.key"
 PUBLIC_KEY_PATH = f"{WG_DIR}/public.key"
 WG_CONF_PATH = f"{WG_DIR}/wg0.conf"

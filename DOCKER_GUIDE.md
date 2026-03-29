@@ -20,24 +20,23 @@ It should say `Registered with Virtual IP: ...` when your first agents start con
 
 ---
 
-## 🛠 Running the "Agent" (Important)
+## 🛠 Running the "Agent" in Docker
 
-### For your 5 MacBooks & 2 Windows Desktops:
-**Do NOT use Docker for the Agent.**
-Because Docker on macOS/Windows runs in a virtual machine (Docker Desktop), the container doesn't have direct access to your *host machine's* network hardware. This makes it very difficult to create a tunnel for the whole computer.
+The Agent is now containerized and can be configured with environment variables.
 
-**The Best Way for Mac/Windows:**
-1.  Install **WireGuard** and **Python** directly on the host.
-2.  Run `sudo python agent.py` (macOS) or as Administrator (Windows).
+### Step 1: Run on each machine
+```bash
+BRAIN_URL=http://your-brain-ip:8000 MACHINE_NAME=macbook-1 docker compose up -d agent
+```
 
-### For Linux Machines (If any):
-If you have a Linux server/machine, you *can* use Docker:
-1.  Uncomment the `agent` section in `docker-compose.yml`.
-2.  Run:
-    ```bash
-    docker compose up -d agent
-    ```
-    *Note: The `--cap-add=NET_ADMIN` and `network_mode: host` flags are essential for this to work.*
+### Step 2: Environment Variables
+- `BRAIN_URL`: The URL of the Brain server (e.g., `http://192.168.1.10:8000`).
+- `MACHINE_NAME`: A unique name for each machine in the cluster.
+- `WG_DIR`: (Optional) The directory to store WireGuard configuration. Defaults to `/etc/wireguard`.
+
+### Important Notes:
+- **Privileges:** The agent needs `--cap-add=NET_ADMIN` to configure the network interface.
+- **Mac/Windows Compatibility:** You still need the **WireGuard** driver installed on your host machine. On macOS/Windows, the "Native Python" method is still recommended if you encounter networking issues.
 
 ---
 
