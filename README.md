@@ -1,4 +1,10 @@
-# ⚡️ Mini-Mesh Quickstart Guide
+# Mini-Mesh: Lightweight Home Cluster Network
+
+Mini-Mesh is a zero-cloud, lightweight alternative to Tailscale designed to connect multiple Macs and Windows PCs for distributed computing (rendering, AI training, etc.).
+
+---
+
+# ⚡️ Quickstart Guide
 
 Get your 5 MacBooks and 2 Windows PCs connected in under 5 minutes.
 
@@ -44,3 +50,11 @@ Ping any machine in your cluster using its **Virtual IP**:
 - Second Worker: `10.0.0.3`
 
 **Success!** Your 7 machines are now connected via a secure, private Virtual LAN.
+
+---
+
+## 📂 Documentation
+- [Distributed Computing Setup Guide](distributed_computing_setup.md)
+- [Mini-Mesh Detailed User Guide](MINI_MESH_GUIDE.md)
+- [Docker Setup Guide](DOCKER_GUIDE.md)
+- [Technical Design Doc](mini_mesh_design.md)
